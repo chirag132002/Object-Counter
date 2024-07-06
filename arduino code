@@ -1,0 +1,24 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+int irPin = 2;
+int count = 0;
+
+void setup() {
+  pinMode(irPin, INPUT);
+  lcd.init();
+  lcd.backlight();
+}
+
+void loop() {
+  if (digitalRead(irPin) == LOW) {
+    count++;
+  }
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("IR count: ");
+  lcd.print(count);
+  delay(1000);
+}
